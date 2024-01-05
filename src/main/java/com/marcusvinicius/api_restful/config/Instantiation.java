@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.marcusvinicius.api_restful.domain.Post;
 import com.marcusvinicius.api_restful.domain.User;
+import com.marcusvinicius.api_restful.dto.AuthorDTO;
 import com.marcusvinicius.api_restful.repository.PostRepository;
 import com.marcusvinicius.api_restful.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner {
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Partiu Viagem", "Viagem SP VLW", maria);
-		Post post2 = new Post(null, sdf.parse("22/03/2023"), "Olá", "BLZ?", maria);
-		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Partiu Viagem", "Viagem SP VLW", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("22/03/2023"), "Olá", "BLZ?", new AuthorDTO(maria));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 }
