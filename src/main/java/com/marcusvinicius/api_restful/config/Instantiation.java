@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.marcusvinicius.api_restful.domain.Post;
 import com.marcusvinicius.api_restful.domain.User;
 import com.marcusvinicius.api_restful.dto.AuthorDTO;
+import com.marcusvinicius.api_restful.dto.CommentDTO;
 import com.marcusvinicius.api_restful.repository.PostRepository;
 import com.marcusvinicius.api_restful.repository.UserRepository;
 
@@ -40,6 +41,13 @@ public class Instantiation implements CommandLineRunner {
 		
 		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Partiu Viagem", "Viagem SP VLW", new AuthorDTO(maria));
 		Post post2 = new Post(null, sdf.parse("22/03/2023"), "Olá", "BLZ?", new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("Boa Viagem", sdf.parse("21/04/2023"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Aproveite", sdf.parse("22/04/2023"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Tenha um bom dia!", sdf.parse("25/04/2023"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
